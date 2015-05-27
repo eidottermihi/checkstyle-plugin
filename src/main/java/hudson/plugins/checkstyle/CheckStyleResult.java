@@ -87,6 +87,7 @@ public class CheckStyleResult extends BuildResult {
                 Issue i = new Issue();
                 i.setContextHashCode(annotation.getContextHashCode());
                 i.setMessage(annotation.getMessage());
+                i.setOrigin(CheckStylePublisher.PLUGIN_NAME);
                 Priority prio;
                 switch (annotation.getPriority()){
                     case HIGH:

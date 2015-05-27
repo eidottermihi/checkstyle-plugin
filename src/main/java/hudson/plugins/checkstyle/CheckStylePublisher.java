@@ -28,7 +28,7 @@ public class CheckStylePublisher extends HealthAwarePublisher {
     /** Unique ID of this class. */
     private static final long serialVersionUID = 6369581633551160418L;
 
-    private static final String PLUGIN_NAME = "CHECKSTYLE";
+    protected static final String PLUGIN_NAME = "CHECKSTYLE";
 
     /** Default Checkstyle pattern. */
     private static final String DEFAULT_PATTERN = "**/checkstyle-result.xml";
