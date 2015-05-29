@@ -2,7 +2,6 @@ package hudson.plugins.checkstyle;
 
 import com.google.inject.Inject;
 import com.thoughtworks.xstream.XStream;
-
 import hudson.model.AbstractBuild;
 import hudson.plugins.analysis.core.BuildHistory;
 import hudson.plugins.analysis.core.BuildResult;
@@ -12,7 +11,6 @@ import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.checkstyle.parser.Warning;
 import jenkins.model.Jenkins;
 import org.jenkinsci.plugins.codehealth.model.Issue;
-import org.jenkinsci.plugins.codehealth.model.Priority;
 import org.jenkinsci.plugins.codehealth.service.JPAIssueRepository;
 
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ public class CheckStyleResult extends BuildResult {
 
     @Inject
     private transient JPAIssueRepository jpaIssueRepository;
+
+    private transient CheckStyleIssueMapper issueMapper = new CheckStyleIssueMapper();
 
     /**
      * Creates a new instance of {@link CheckStyleResult}.
@@ -80,32 +80,8 @@ public class CheckStyleResult extends BuildResult {
 
         if (canSerialize) {
             serializeAnnotations(result.getAnnotations());
-            // map Annotations to Issues
             Jenkins.getInstance().getInjector().injectMembers(this);
-            List<Issue> newIssues = new ArrayList<Issue>();
-            for (FileAnnotation annotation : result.getAnnotations()){
-                Issue i = new Issue();
-                i.setContextHashCode(annotation.getContextHashCode());
-                i.setMessage(annotation.getMessage());
-                i.setOrigin(CheckStylePublisher.PLUGIN_NAME);
-                Priority prio;
-                switch (annotation.getPriority()){
-                    case HIGH:
-                        prio = Priority.HIGH;
-                        break;
-                    case NORMAL:
-                        prio = Priority.NORMAL;
-                        break;
-                    case LOW:
-                        prio = Priority.LOW;
-                        break;
-                    default:
-                        prio = Priority.NORMAL;
-                }
-                i.setPriority(prio);
-                newIssues.add(i);
-            }
-            jpaIssueRepository.newIssues(newIssues, (hudson.model.TopLevelItem) build.getProject());
+            jpaIssueRepository.newIssues(result.getAnnotations(), (hudson.model.TopLevelItem) build.getProject(), issueMapper);
         }
     }
 
