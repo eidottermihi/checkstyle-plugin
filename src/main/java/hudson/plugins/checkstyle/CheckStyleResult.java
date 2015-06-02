@@ -77,11 +77,12 @@ public class CheckStyleResult extends BuildResult {
     CheckStyleResult(final AbstractBuild<?, ?> build, final BuildHistory history,
             final ParserResult result, final String defaultEncoding, final boolean canSerialize) {
         super(build, history, result, defaultEncoding);
-
         if (canSerialize) {
             serializeAnnotations(result.getAnnotations());
             Jenkins.getInstance().getInjector().injectMembers(this);
             jpaIssueRepository.updateIssues(result.getAnnotations(), build, issueMapper);
+            // fixed warning set is initialized in super-constructor
+            jpaIssueRepository.fixedIssues(this.getFixedWarnings(), build, issueMapper);
         }
     }
 
