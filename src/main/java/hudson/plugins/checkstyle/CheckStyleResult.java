@@ -81,7 +81,7 @@ public class CheckStyleResult extends BuildResult {
         if (canSerialize) {
             serializeAnnotations(result.getAnnotations());
             Jenkins.getInstance().getInjector().injectMembers(this);
-            jpaIssueRepository.newIssues(result.getAnnotations(), (hudson.model.TopLevelItem) build.getProject(), issueMapper);
+            jpaIssueRepository.updateIssues(result.getAnnotations(), build, issueMapper);
         }
     }
 
