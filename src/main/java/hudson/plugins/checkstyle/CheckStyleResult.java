@@ -1,20 +1,12 @@
 package hudson.plugins.checkstyle;
 
-import com.google.inject.Inject;
 import com.thoughtworks.xstream.XStream;
 import hudson.model.AbstractBuild;
 import hudson.plugins.analysis.core.BuildHistory;
 import hudson.plugins.analysis.core.BuildResult;
 import hudson.plugins.analysis.core.ParserResult;
 import hudson.plugins.analysis.core.ResultAction;
-import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.checkstyle.parser.Warning;
-import jenkins.model.Jenkins;
-import org.jenkinsci.plugins.codehealth.model.Issue;
-import org.jenkinsci.plugins.codehealth.service.JPAIssueRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents the results of the Checkstyle analysis. One instance of this class
@@ -24,11 +16,6 @@ import java.util.List;
  */
 public class CheckStyleResult extends BuildResult {
     private static final long serialVersionUID = 2768250056765266658L;
-
-    @Inject
-    private transient JPAIssueRepository jpaIssueRepository;
-
-    private transient CheckStyleIssueMapper issueMapper = new CheckStyleIssueMapper();
 
     /**
      * Creates a new instance of {@link CheckStyleResult}.
@@ -79,10 +66,6 @@ public class CheckStyleResult extends BuildResult {
         super(build, history, result, defaultEncoding);
         if (canSerialize) {
             serializeAnnotations(result.getAnnotations());
-            Jenkins.getInstance().getInjector().injectMembers(this);
-            jpaIssueRepository.updateIssues(result.getAnnotations(), build, issueMapper);
-            // fixed warning set is initialized in super-constructor
-            jpaIssueRepository.fixedIssues(this.getFixedWarnings(), build, issueMapper);
         }
     }
 
