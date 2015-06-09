@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * {@link IssueProvider} for Checkstyle Warnings.
+ *
  * @author Michael Prankl
  */
 @Extension
