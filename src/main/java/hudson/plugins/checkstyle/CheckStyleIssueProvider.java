@@ -21,10 +21,10 @@ import java.util.List;
 @Extension
 public class CheckStyleIssueProvider extends IssueProvider {
 
-    private AbstractIssueMapper cim = new CheckStyleIssueMapper();
+    private AbstractIssueMapper<FileAnnotation> issueMapper = new CheckStyleIssueMapper();
 
     @Override
-    public Collection<Issue> getExistingIssues(AbstractBuild<?, ?> build) {
+    public Collection<Issue> getExistingIssues(final AbstractBuild<?, ?> build) {
         CheckStyleResult checkStyleResult = getResult(build);
         if (checkStyleResult != null) {
             return map(checkStyleResult.getAnnotations());
@@ -33,7 +33,7 @@ public class CheckStyleIssueProvider extends IssueProvider {
     }
 
     @Override
-    public Collection<Issue> getFixedIssues(AbstractBuild<?, ?> build) {
+    public Collection<Issue> getFixedIssues(final AbstractBuild<?, ?> build) {
         CheckStyleResult checkStyleResult = getResult(build);
         if (checkStyleResult != null) {
             return map(checkStyleResult.getFixedWarnings());
@@ -41,15 +41,15 @@ public class CheckStyleIssueProvider extends IssueProvider {
         return Collections.emptyList();
     }
 
-    private List<Issue> map(Collection<FileAnnotation> annotations) {
+    private List<Issue> map(final Collection<FileAnnotation> annotations) {
         final List<Issue> issues = new ArrayList<Issue>(annotations.size());
         for (FileAnnotation annotation : annotations) {
-            issues.add(cim.map(annotation));
+            issues.add(issueMapper.map(annotation));
         }
         return issues;
     }
 
-    private CheckStyleResult getResult(AbstractBuild<?, ?> build) {
+    private CheckStyleResult getResult(final AbstractBuild<?, ?> build) {
         for (Action action : build.getPersistentActions()) {
             if (action instanceof CheckStyleResultAction) {
                 return ((CheckStyleResultAction) action).getResult();
