@@ -4,8 +4,9 @@ import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.plugins.analysis.util.model.FileAnnotation;
+import org.jenkinsci.plugins.codehealth.Issue;
 import org.jenkinsci.plugins.codehealth.IssueProvider;
-import org.jenkinsci.plugins.codehealth.model.Issue;
+import org.jenkinsci.plugins.codehealth.model.IssueEntity;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
 import java.util.ArrayList;
@@ -39,6 +40,11 @@ public class CheckStyleIssueProvider extends IssueProvider {
             return map(checkStyleResult.getFixedWarnings());
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public String getOrigin() {
+        return CheckStylePublisher.PLUGIN_NAME;
     }
 
     private List<Issue> map(final Collection<FileAnnotation> annotations) {

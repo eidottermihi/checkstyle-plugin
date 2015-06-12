@@ -3,7 +3,8 @@ package hudson.plugins.checkstyle;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.checkstyle.parser.Warning;
-import org.jenkinsci.plugins.codehealth.model.Issue;
+import org.jenkinsci.plugins.codehealth.Issue;
+import org.jenkinsci.plugins.codehealth.model.IssueEntity;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 import org.junit.Test;
 
@@ -38,7 +39,6 @@ public class CheckStyleIssueMapperTest {
     private void checkMapping(final FileAnnotation warning, final Issue mappedIssue) {
         assertNotNull(mappedIssue);
         assertEquals(warning.getMessage(), mappedIssue.getMessage());
-        assertEquals(CheckStylePublisher.PLUGIN_NAME, mappedIssue.getOrigin());
         assertEquals(warning.getContextHashCode(), mappedIssue.getContextHashCode());
         assertEquals(org.jenkinsci.plugins.codehealth.model.Priority.NORMAL, mappedIssue.getPriority());
     }
