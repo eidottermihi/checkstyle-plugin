@@ -47,6 +47,11 @@ public class CheckStyleIssueProvider extends IssueProvider {
         return CheckStylePublisher.PLUGIN_NAME;
     }
 
+    @Override
+    public boolean canProvideFixedIssues() {
+        return true;
+    }
+
     private List<Issue> map(final Collection<FileAnnotation> annotations) {
         final List<Issue> issues = new ArrayList<Issue>(annotations.size());
         for (FileAnnotation annotation : annotations) {
