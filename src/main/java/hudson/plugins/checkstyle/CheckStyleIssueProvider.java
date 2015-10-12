@@ -4,9 +4,8 @@ import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.plugins.analysis.util.model.FileAnnotation;
-import org.jenkinsci.plugins.codehealth.Issue;
-import org.jenkinsci.plugins.codehealth.IssueProvider;
-import org.jenkinsci.plugins.codehealth.model.IssueEntity;
+import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
+import org.jenkinsci.plugins.codehealth.provider.issues.IssueProvider;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
 import java.util.ArrayList;

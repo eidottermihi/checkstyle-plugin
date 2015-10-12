@@ -1,7 +1,7 @@
 package hudson.plugins.checkstyle;
 
 import hudson.plugins.analysis.util.model.FileAnnotation;
-import org.jenkinsci.plugins.codehealth.Issue;
+import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
 import org.jenkinsci.plugins.codehealth.model.Priority;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
