@@ -55,7 +55,7 @@ public class CheckStyleIssueProvider extends IssueProvider {
     @Nullable
     @Override
     public String getProjectResultUrlName() {
-        return CheckStyleDescriptor.RESULT_URL;
+        return CheckStyleDescriptor.PLUGIN_ID;
     }
 
     @Nullable
