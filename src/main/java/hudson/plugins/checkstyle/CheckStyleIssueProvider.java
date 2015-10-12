@@ -8,6 +8,7 @@ import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
 import org.jenkinsci.plugins.codehealth.provider.issues.IssueProvider;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -49,6 +50,18 @@ public class CheckStyleIssueProvider extends IssueProvider {
     @Override
     public boolean canProvideFixedIssues() {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public String getProjectResultUrlName() {
+        return CheckStyleDescriptor.RESULT_URL;
+    }
+
+    @Nullable
+    @Override
+    public String getBuildResultUrlName() {
+        return CheckStyleDescriptor.RESULT_URL;
     }
 
     private List<Issue> map(final Collection<FileAnnotation> annotations) {
