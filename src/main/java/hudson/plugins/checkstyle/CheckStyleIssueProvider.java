@@ -8,6 +8,7 @@ import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
 import org.jenkinsci.plugins.codehealth.provider.issues.IssueProvider;
 import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,6 +46,12 @@ public class CheckStyleIssueProvider extends IssueProvider {
     @Override
     public String getOrigin() {
         return CheckStylePublisher.PLUGIN_NAME;
+    }
+
+    @Nonnull
+    @Override
+    public String getOriginPluginName() {
+        return "Checkstyle Plug-in";
     }
 
     @Override
