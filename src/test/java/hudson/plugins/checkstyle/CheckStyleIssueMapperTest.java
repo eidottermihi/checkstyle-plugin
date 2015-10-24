@@ -39,7 +39,7 @@ public class CheckStyleIssueMapperTest {
         assertNotNull(mappedIssue);
         assertEquals(warning.getMessage(), mappedIssue.getMessage());
         assertEquals(warning.getContextHashCode(), mappedIssue.getContextHashCode());
-        assertEquals(org.jenkinsci.plugins.codehealth.model.Priority.NORMAL, mappedIssue.getPriority());
+        assertEquals(org.jenkinsci.plugins.codehealth.provider.Priority.NORMAL, mappedIssue.getPriority());
     }
 
     private Warning buildWarning(final long contextHash, final Priority priority, final String message) {
