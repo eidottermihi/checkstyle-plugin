@@ -4,9 +4,9 @@ import hudson.Extension;
 import hudson.model.AbstractBuild;
 import hudson.model.Action;
 import hudson.plugins.analysis.util.model.FileAnnotation;
+import org.jenkinsci.plugins.codehealth.provider.issues.AbstractIssueMapper;
 import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
 import org.jenkinsci.plugins.codehealth.provider.issues.IssueProvider;
-import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
