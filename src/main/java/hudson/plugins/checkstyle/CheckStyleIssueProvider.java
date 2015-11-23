@@ -1,8 +1,7 @@
 package hudson.plugins.checkstyle;
 
 import hudson.Extension;
-import hudson.model.AbstractBuild;
-import hudson.model.Action;
+import hudson.model.Run;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import org.jenkinsci.plugins.codehealth.provider.issues.AbstractIssueMapper;
 import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
@@ -26,8 +25,8 @@ public class CheckStyleIssueProvider extends IssueProvider {
     private AbstractIssueMapper<FileAnnotation> issueMapper = new CheckStyleIssueMapper();
 
     @Override
-    public Collection<Issue> getExistingIssues(final AbstractBuild<?, ?> build) {
-        CheckStyleResult checkStyleResult = getResult(build);
+    public Collection<Issue> getExistingIssues(final Run<?, ?> run) {
+        CheckStyleResult checkStyleResult = getResult(run);
         if (checkStyleResult != null) {
             return map(checkStyleResult.getAnnotations());
         }
@@ -35,8 +34,8 @@ public class CheckStyleIssueProvider extends IssueProvider {
     }
 
     @Override
-    public Collection<Issue> getFixedIssues(final AbstractBuild<?, ?> build) {
-        CheckStyleResult checkStyleResult = getResult(build);
+    public Collection<Issue> getFixedIssues(final Run<?, ?> run) {
+        CheckStyleResult checkStyleResult = getResult(run);
         if (checkStyleResult != null) {
             return map(checkStyleResult.getFixedWarnings());
         }
@@ -79,11 +78,10 @@ public class CheckStyleIssueProvider extends IssueProvider {
         return issues;
     }
 
-    private CheckStyleResult getResult(final AbstractBuild<?, ?> build) {
-        for (Action action : build.getPersistentActions()) {
-            if (action instanceof CheckStyleResultAction) {
-                return ((CheckStyleResultAction) action).getResult();
-            }
+    private CheckStyleResult getResult(final Run<?, ?> run) {
+        CheckStyleResultAction action = run.getAction(CheckStyleResultAction.class);
+        if (action != null) {
+            return action.getResult();
         }
         return null;
     }
