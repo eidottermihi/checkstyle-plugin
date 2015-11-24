@@ -3,8 +3,8 @@ package hudson.plugins.checkstyle;
 import hudson.plugins.analysis.util.model.FileAnnotation;
 import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.checkstyle.parser.Warning;
+import org.jenkinsci.plugins.codehealth.provider.issues.AbstractIssueMapper;
 import org.jenkinsci.plugins.codehealth.provider.issues.Issue;
-import org.jenkinsci.plugins.codehealth.util.AbstractIssueMapper;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
