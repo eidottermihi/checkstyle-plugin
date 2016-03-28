@@ -26,19 +26,10 @@ public class CheckStyleIssueProvider extends IssueProvider {
     private AbstractIssueMapper<FileAnnotation> issueMapper = new CheckStyleIssueMapper();
 
     @Override
-    public Collection<Issue> getExistingIssues(final AbstractBuild<?, ?> build) {
+    public Collection<Issue> getIssues(final AbstractBuild<?, ?> build) {
         CheckStyleResult checkStyleResult = getResult(build);
         if (checkStyleResult != null) {
             return map(checkStyleResult.getAnnotations());
-        }
-        return Collections.emptyList();
-    }
-
-    @Override
-    public Collection<Issue> getFixedIssues(final AbstractBuild<?, ?> build) {
-        CheckStyleResult checkStyleResult = getResult(build);
-        if (checkStyleResult != null) {
-            return map(checkStyleResult.getFixedWarnings());
         }
         return Collections.emptyList();
     }
@@ -52,11 +43,6 @@ public class CheckStyleIssueProvider extends IssueProvider {
     @Override
     public String getOriginPluginName() {
         return "Checkstyle Plug-in";
-    }
-
-    @Override
-    public boolean canProvideFixedIssues() {
-        return true;
     }
 
     @Nullable
