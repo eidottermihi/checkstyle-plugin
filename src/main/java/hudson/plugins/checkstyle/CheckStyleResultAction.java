@@ -1,6 +1,6 @@
 package hudson.plugins.checkstyle;
 
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.analysis.core.AbstractResultAction;
 import hudson.plugins.analysis.core.HealthDescriptor;
 import hudson.plugins.analysis.core.PluginDescriptor;
@@ -27,7 +27,8 @@ public class CheckStyleResultAction extends AbstractResultAction<CheckStyleResul
      * @param result
      *            the result in this build
      */
-    public CheckStyleResultAction(final AbstractBuild<?, ?> owner, final HealthDescriptor healthDescriptor, final CheckStyleResult result) {
+    public CheckStyleResultAction(final Run<?, ?> owner, final HealthDescriptor healthDescriptor,
+            final CheckStyleResult result) {
         super(owner, new CheckStyleHealthDescriptor(healthDescriptor), result);
     }
 

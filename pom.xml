@@ -4,14 +4,14 @@
   <parent>
     <groupId>org.jvnet.hudson.plugins</groupId>
     <artifactId>analysis-pom</artifactId>
-    <version>1.59</version>
-    <relativePath>../analysis-pom/pom.xml</relativePath>
+    <version>1.64</version>
+    <relativePath>../analysis-pom</relativePath>
   </parent>
 
   <artifactId>checkstyle</artifactId>
   <packaging>hpi</packaging>
   <name>Checkstyle Plug-in</name>
-  <version>3.43-SNAPSHOT</version>
+  <version>3.47-SNAPSHOT</version>
   <url>http://wiki.jenkins-ci.org/x/GYCGAQ</url>
   <description>This plug-in generates the trend report for
     Checkstyle, an open source static code analysis program.
@@ -34,7 +34,7 @@
     <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-core</artifactId>
-      <version>1.72</version>
+      <version>1.77</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -42,14 +42,9 @@
       <version>3.2</version>
     </dependency>
     <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.11.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.jvnet.hudson.plugins</groupId>
       <artifactId>analysis-test</artifactId>
-      <version>1.12</version>
+      <version>1.18</version>
       <scope>test</scope>
     </dependency>
     <!-- Providing issues for codehealth plugin -->
